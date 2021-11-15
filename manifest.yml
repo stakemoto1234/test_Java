@@ -1,0 +1,22 @@
+---
+applications:
+
+- name: jdbcsample
+  memory: 1500M
+  timeout: 300
+  random-route: true
+#  path: application/target/jdbcsample-application.jar
+  path: application/target/jdbcsample-application.war
+  buildpacks:
+    - sap_java_buildpack
+  env:
+#    USE_JCO: true
+#    TARGET_RUNTIME: main
+    TARGET_RUNTIME: tomcat
+    SPRING_PROFILES_ACTIVE: 'cloud'
+    JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:128m..'
+  services:
+#   - s4h-destination
+#   - s4h-connectivity
+#   - s4h-xsuaa
+   - exts4h_hdidb

@@ -1,0 +1,41 @@
+_schema-version: "3.3"
+ID: com.pj.common
+version: 0.0.1
+modules:
+  - name: jdbcsample
+    type: java.tomcat
+    path: application
+    properties:
+      SPRING_PROFILES_ACTIVE: cloud
+      USE_JCO: true
+    build-parameters:
+      builder: custom
+      commands:
+        - mvn clean package
+      #build-result: target/*-exec.[wj]ar
+      build-result: target/*.war
+    requires:
+      - name: s4h-destination
+#      - name: s4h-connectivity
+#      - name: s4h-xsuaa
+#      - name: exts4h_hdidb
+resources:
+    - name: s4h-destination
+      type: org.cloudfoundry.existing-service
+      parameters:
+        service-name: s4h-destination
+
+#    - name: s4h-connectivity
+#      type: org.cloudfoundry.existing-service
+#      parameters:
+#        service-name: s4h-connectivity
+
+#    - name: s4h-xsuaa
+#      type: org.cloudfoundry.existing-service
+#      parameters:
+#        service-name: s4h-xsuaa
+
+#    - name: exts4h_hdidb
+#      type: org.cloudfoundry.existing-service
+#      parameters:
+#        service-name: exts4h_hdidb
